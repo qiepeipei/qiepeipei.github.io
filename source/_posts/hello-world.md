@@ -8,7 +8,7 @@ Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [docume
 ### Create a new post
 
 ``` bash
-$ hexo new "My New Post111111111111111"
+$ hexo new "My New Post1111111111111113232323232"
 ```
 
 More info: [Writing](https://hexo.io/docs/writing.html)
