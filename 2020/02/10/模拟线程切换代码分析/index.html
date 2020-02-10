@@ -6,13 +6,21 @@
   <meta name="keywords" content=" 线程 ">
   <meta name="description" content="模拟线程切换代码分析 | 馍馍的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta property="og:type" content="website">
-<meta property="og:title" content="馍馍的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存  对于32位Windows系统上进程，进程地址空间大小默认为2 GB 如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB 对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="驱动开发必备基础">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="馍馍的博客">
+<meta property="og:description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存  对于32位Windows系统上进程，进程地址空间大小默认为2 GB 如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB 对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (w">
 <meta property="og:locale" content="cn">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png">
+<meta property="article:published_time" content="2020-02-10T08:24:42.000Z">
+<meta property="article:modified_time" content="2020-02-10T09:06:09.981Z">
 <meta property="article:author" content="馍馍">
+<meta property="article:tag" content="驱动">
+<meta property="article:tag" content="内核">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -595,7 +603,7 @@ int main()
 
     </div>
     <div class="full-toc">
-        <button class="full"><span class="min mobile"></span></button>
+        <button class="full"><span class="min "></span></button>
 <button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
 <div class="post-toc"><span class="post-toc-title">目录</span>
     <div class="post-toc-content">
