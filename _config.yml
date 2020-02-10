@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 馍馍的博客
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: '馍馍'
+language: cn
 timezone: ''
 
 # URL
@@ -45,12 +45,12 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
+  enable: false
+#  line_number: true
+#  auto_detect: false
+#  tab_replace: ''
+#  wrap: true
+#  hljs: false
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
