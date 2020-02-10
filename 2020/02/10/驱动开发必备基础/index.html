@@ -6,13 +6,21 @@
   <meta name="keywords" content=" 驱动 , 内核 ">
   <meta name="description" content="驱动开发必备基础 | 馍馍的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta property="og:type" content="website">
-<meta property="og:title" content="馍馍的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存  对于32位Windows系统上进程，进程地址空间大小默认为2GB 如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB 对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="驱动开发必备基础">
+<meta property="og:url" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="馍馍的博客">
+<meta property="og:description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存  对于32位Windows系统上进程，进程地址空间大小默认为2GB 如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB 对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (wi">
 <meta property="og:locale" content="cn">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png">
+<meta property="article:published_time" content="2020-02-10T08:24:42.000Z">
+<meta property="article:modified_time" content="2020-02-10T13:28:00.210Z">
 <meta property="article:author" content="馍馍">
+<meta property="article:tag" content="驱动">
+<meta property="article:tag" content="内核">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -243,7 +251,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-10 21:23:00'>2020-02-10 16:24</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-10 21:28:00'>2020-02-10 16:24</time>
         
     </div>
     <div class="article-meta">
@@ -265,22 +273,17 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#驱动开发必备基础"><span class="toc-text">驱动开发必备基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对于32位Windows系统上进程，进程地址空间大小默认为2GB"><span class="toc-text">对于32位Windows系统上进程，进程地址空间大小默认为2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果32位Windows系统上Portable-Executable-header启用LARGEADDRESSAWARE标记，进程空间大小为3GB-否则依然为2GB"><span class="toc-text">如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于64位进程-在64位Windows系统上-，地址空间大小为8TB或128TB-windows8-1及以后版本"><span class="toc-text">对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (windows8.1及以后版本)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于64位Windows系统上的32位进程，如果Portable-Executable-header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB"><span class="toc-text">对于64位Windows系统上的32位进程，如果Portable Executable header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB"><span class="toc-text">内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问"><span class="toc-text">通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">注意：大页面的缺点是需要在RAM中有连续的内存，如果内存紧张或非常碎片化，内存可能分配会失败。大页面总是不可分页的，必须仅通过读&#x2F;写访问进行保护。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">页面状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Free-空闲-任何访问该页面的尝试都会导致访问冲突异常，因为这些页面没有映射到能够解析该引用的存储位置"><span class="toc-text">Free(空闲)  任何访问该页面的尝试都会导致访问冲突异常，因为这些页面没有映射到能够解析该引用的存储位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reserved-保留-任何访问该页面的尝试都会导致访问冲突异常，使用VirtualAlloc不会分配该区域内存，不过有办法在该区域分配内存"><span class="toc-text">Reserved(保留)  任何访问该页面的尝试都会导致访问冲突异常，使用VirtualAlloc不会分配该区域内存，不过有办法在该区域分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Committed-提交-可以在没有保护属性的情况下成功访问的已分配页面-写入只读页面会导致访问冲突-。提交的页面通常映射到RAM或文件"><span class="toc-text">Committed(提交) 可以在没有保护属性的情况下成功访问的已分配页面(写入只读页面会导致访问冲突)。提交的页面通常映射到RAM或文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">系统内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位系统上如果没有增加用户虚拟地址空间设置，操作系统模块驻留在最上层的2GB虚拟地址空间中，从地址0x8000000到0xFFFFFFFF"><span class="toc-text">32位系统上如果没有增加用户虚拟地址空间设置，操作系统模块驻留在最上层的2GB虚拟地址空间中，从地址0x8000000到0xFFFFFFFF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位系统上如果设置了增加用户虚拟地址空间，操作系统驻留在剩余的地址空间中。例如：如果系统为每个进程配置了3GB的用户地址空间，则操作系统将取上面的1GB，从地址0xC0000000到0xFFFFFFFF"><span class="toc-text">32位系统上如果设置了增加用户虚拟地址空间，操作系统驻留在剩余的地址空间中。例如：如果系统为每个进程配置了3GB的用户地址空间，则操作系统将取上面的1GB，从地址0xC0000000到0xFFFFFFFF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64位系统上Windows-8、Server-2012和更早版本的64位系统上，操作系统占据了最高8-TB的虚拟地址空间。"><span class="toc-text">64位系统上Windows 8、Server 2012和更早版本的64位系统上，操作系统占据了最高8 TB的虚拟地址空间。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64位系统上Windows-8-1、Server-2012-R2及更高版本的64位系统上，操作系统占据了128-TB以上的虚拟地址空间。"><span class="toc-text">64位系统上Windows 8.1、Server 2012 R2及更高版本的64位系统上，操作系统占据了128 TB以上的虚拟地址空间。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#驱动开发必备基础"><span class="toc-text">驱动开发必备基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对于32位Windows系统上进程，进程地址空间大小默认为2GB"><span class="toc-text">对于32位Windows系统上进程，进程地址空间大小默认为2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果32位Windows系统上Portable-Executable-header启用LARGEADDRESSAWARE标记，进程空间大小为3GB-否则依然为2GB"><span class="toc-text">如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于64位进程-在64位Windows系统上-，地址空间大小为8TB或128TB-windows8-1及以后版本"><span class="toc-text">对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (windows8.1及以后版本)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对于64位Windows系统上的32位进程，如果Portable-Executable-header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB"><span class="toc-text">对于64位Windows系统上的32位进程，如果Portable Executable header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB"><span class="toc-text">内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问"><span class="toc-text">通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">注意</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-text">大页面的缺点是需要在RAM中有连续的内存，如果内存紧张或非常碎片化，内存可能分配会失败。大页面总是不可分页的，必须仅通过读&#x2F;写访问进行保护。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">页面状态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Free-空闲-任何访问该页面的尝试都会导致访问冲突异常，因为这些页面没有映射到能够解析该引用的存储位置"><span class="toc-text">Free(空闲)  任何访问该页面的尝试都会导致访问冲突异常，因为这些页面没有映射到能够解析该引用的存储位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reserved-保留-任何访问该页面的尝试都会导致访问冲突异常，使用VirtualAlloc不会分配该区域内存，不过有办法在该区域分配内存"><span class="toc-text">Reserved(保留)  任何访问该页面的尝试都会导致访问冲突异常，使用VirtualAlloc不会分配该区域内存，不过有办法在该区域分配内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Committed-提交-可以在没有保护属性的情况下成功访问的已分配页面-写入只读页面会导致访问冲突-。提交的页面通常映射到RAM或文件"><span class="toc-text">Committed(提交) 可以在没有保护属性的情况下成功访问的已分配页面(写入只读页面会导致访问冲突)。提交的页面通常映射到RAM或文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">系统内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位系统上如果没有增加用户虚拟地址空间设置，操作系统模块驻留在最上层的2GB虚拟地址空间中，从地址0x8000000到0xFFFFFFFF"><span class="toc-text">32位系统上如果没有增加用户虚拟地址空间设置，操作系统模块驻留在最上层的2GB虚拟地址空间中，从地址0x8000000到0xFFFFFFFF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32位系统上如果设置了增加用户虚拟地址空间，操作系统驻留在剩余的地址空间中。例如：如果系统为每个进程配置了3GB的用户地址空间，则操作系统将取上面的1GB，从地址0xC0000000到0xFFFFFFFF"><span class="toc-text">32位系统上如果设置了增加用户虚拟地址空间，操作系统驻留在剩余的地址空间中。例如：如果系统为每个进程配置了3GB的用户地址空间，则操作系统将取上面的1GB，从地址0xC0000000到0xFFFFFFFF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64位系统上Windows-8、Server-2012和更早版本的64位系统上，操作系统占据了最高8-TB的虚拟地址空间。"><span class="toc-text">64位系统上Windows 8、Server 2012和更早版本的64位系统上，操作系统占据了最高8 TB的虚拟地址空间。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64位系统上Windows-8-1、Server-2012-R2及更高版本的64位系统上，操作系统占据了128-TB以上的虚拟地址空间。"><span class="toc-text">64位系统上Windows 8.1、Server 2012 R2及更高版本的64位系统上，操作系统占据了128 TB以上的虚拟地址空间。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">
 注意
 
 
-
-
 所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候
-
-
-
 每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的
-
-
-
 保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址
-</span></a></li></ol></li></ol></li></ol></li></ol>
+
+线程
+
+</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-text">所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-text">每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-text">保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -305,7 +308,8 @@
 <li><h3 id="对于64位进程-在64位Windows系统上-，地址空间大小为8TB或128TB-windows8-1及以后版本"><a href="#对于64位进程-在64位Windows系统上-，地址空间大小为8TB或128TB-windows8-1及以后版本" class="headerlink" title="对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (windows8.1及以后版本)"></a>对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (windows8.1及以后版本)</h3></li>
 <li><h3 id="对于64位Windows系统上的32位进程，如果Portable-Executable-header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB"><a href="#对于64位Windows系统上的32位进程，如果Portable-Executable-header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB" class="headerlink" title="对于64位Windows系统上的32位进程，如果Portable Executable header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB"></a>对于64位Windows系统上的32位进程，如果Portable Executable header启用LARGEADDRESSAWARE标记，则地址空间大小为4GB。否则，大小仍然是2GB</h3></li>
 <li><h3 id="内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB"><a href="#内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB" class="headerlink" title="内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB"></a>内存管理单元为页面，正常情况下，Windows架构上页面大小为4KB</h3></li>
-<li><h3 id="通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问"><a href="#通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问" class="headerlink" title="通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问"></a>通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问</h3><h4 style="color: #ff0000; font-weight: 500">注意：大页面的缺点是需要在RAM中有连续的内存，如果内存紧张或非常碎片化，内存可能分配会失败。大页面总是不可分页的，必须仅通过读/写访问进行保护。</h4>
+<li><h3 id="通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问"><a href="#通常CPU会把最近访问的内存地址使用Translation-Lookaside-Buffer-TLB-进程保存方便下次访问" class="headerlink" title="通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问"></a>通常CPU会把最近访问的内存地址使用Translation Lookaside Buffer (TLB)进程保存方便下次访问</h3><h4 style="color: #ff0000; font-weight: 500">注意</h4>
+<h5>大页面的缺点是需要在RAM中有连续的内存，如果内存紧张或非常碎片化，内存可能分配会失败。大页面总是不可分页的，必须仅通过读/写访问进行保护。</h5>
 
 </li>
 </ul>
@@ -325,18 +329,14 @@
 <li><h3 id="64位系统上Windows-8-1、Server-2012-R2及更高版本的64位系统上，操作系统占据了128-TB以上的虚拟地址空间。"><a href="#64位系统上Windows-8-1、Server-2012-R2及更高版本的64位系统上，操作系统占据了128-TB以上的虚拟地址空间。" class="headerlink" title="64位系统上Windows 8.1、Server 2012 R2及更高版本的64位系统上，操作系统占据了128 TB以上的虚拟地址空间。"></a>64位系统上Windows 8.1、Server 2012 R2及更高版本的64位系统上，操作系统占据了128 TB以上的虚拟地址空间。</h3><h4 style="color: #ff0000; font-weight: 500">
 注意
 <br>
-<br>
-所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候<br>
-<br>
-每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的<br>
-<br>
-保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址
-</h4>
+<h5>所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候</h5>
+<h5>每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的</h5>
+<h5>保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址</h5>
 
+<a name="3">线程</a>
 
-</li>
+</h4></li>
 </ul>
-<p><a name="3">线程</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 964098704@qq.com </span>
@@ -350,7 +350,7 @@
     
     <p><span class="copy-title">本文作者:</span><a  title="馍馍">馍馍</a></p>
     <p><span class="copy-title">发布时间:</span>2020-02-10, 16:24:42</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-10, 21:23:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-10, 21:28:00</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/" title="驱动开发必备基础">http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -372,7 +372,7 @@
 
     </div>
     <div class="full-toc">
-        <button class="full"><span class="min mobile"></span></button>
+        <button class="full"><span class="min "></span></button>
 <button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
 <div class="post-toc"><span class="post-toc-title">目录</span>
     <div class="post-toc-content">
