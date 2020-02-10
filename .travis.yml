@@ -2,7 +2,8 @@ sudo: false
 language: node_js
 node_js:
   - 10 # use nodejs v10 LTS
-cache: npm
+cache:
+  npm: false
 branches:
   only:
     - hexoPrj # build master branch only
