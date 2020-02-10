@@ -9,6 +9,7 @@ branches:
 script:
   - hexo generate # generate static files
   - echo 'www.knn.ai' > public/CNAME
+  - echo '.idea/' > public/.gitignore
 deploy:
   provider: pages
   skip-cleanup: true
