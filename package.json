@@ -6,13 +6,16 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "dev": "hexo generate && hexo deploy"
   },
   "hexo": {
     "version": "4.2.0"
   },
   "dependencies": {
     "hexo": "^4.0.0",
+    "hexo-asset-image": "^1.0.0",
+    "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
     "hexo-generator-index": "^1.0.0",
