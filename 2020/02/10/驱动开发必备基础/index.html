@@ -6,16 +6,21 @@
   <meta name="keywords" content=" 驱动 , 内核 ">
   <meta name="description" content="驱动开发必备基础 | 馍馍的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存 对于32位Windows系统上进程，进程地址空间大小默认为2GB  如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB  对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (w">
+<meta name="description" content="进程虚拟内存线程系统调用Windows系统架构句柄和对象 进程 虚拟内存 对于32位Windows系统上进程，进程地址空间大小默认为2GB  如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB  对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (wi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="驱动开发必备基础">
 <meta property="og:url" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="馍馍的博客">
-<meta property="og:description" content="驱动开发必备基础进程虚拟内存线程系统服务系统架构句柄和对象 进程 虚拟内存 对于32位Windows系统上进程，进程地址空间大小默认为2GB  如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB  对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (w">
+<meta property="og:description" content="进程虚拟内存线程系统调用Windows系统架构句柄和对象 进程 虚拟内存 对于32位Windows系统上进程，进程地址空间大小默认为2GB  如果32位Windows系统上Portable Executable header启用LARGEADDRESSAWARE标记，进程空间大小为3GB, 否则依然为2GB  对于64位进程(在64位Windows系统上)，地址空间大小为8TB或128TB (wi">
 <meta property="og:locale" content="cn">
 <meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/user_stacks.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/system_call.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/system_arch.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/winobj.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/process_explorer.png">
 <meta property="article:published_time" content="2020-02-10T08:24:42.000Z">
-<meta property="article:modified_time" content="2020-02-10T13:52:59.734Z">
+<meta property="article:modified_time" content="2020-02-11T08:28:37.061Z">
 <meta property="article:author" content="馍馍">
 <meta property="article:tag" content="驱动">
 <meta property="article:tag" content="内核">
@@ -251,7 +256,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2020-02-10 21:52:59'>2020-02-10 16:24</time>
+        创建时间:<time class="date" title='更新时间: 2020-02-11 16:28:37'>2020-02-10 16:24</time>
         
     </div>
     <div class="article-meta">
@@ -273,7 +278,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#驱动开发必备基础"><span class="toc-text">驱动开发必备基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟内存"><span class="toc-text">虚拟内存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">页面状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">系统内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程"><span class="toc-text">线程</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟内存"><span class="toc-text">虚拟内存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">页面状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">系统内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程"><span class="toc-text">线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">线程重要信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">线程常见状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">线程堆栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统调用"><span class="toc-text">系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows系统架构"><span class="toc-text">Windows系统架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#句柄和对象"><span class="toc-text">句柄和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">内核对象简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">对象名称</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-text">访问现有的对象</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -289,7 +294,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="驱动开发必备基础"><a href="#驱动开发必备基础" class="headerlink" title="驱动开发必备基础"></a>驱动开发必备基础</h1><p><a href="#1">进程</a><br><a href="#2">虚拟内存</a><br><a href="#3">线程</a><br><a href="#4">系统服务</a><br><a href="#5">系统架构</a><br><a href="#6">句柄和对象</a></p>
+        <p><a href="#1">进程</a><br><a href="#2">虚拟内存</a><br><a href="#3">线程</a><br><a href="#4">系统调用</a><br><a href="#5">Windows系统架构</a><br><a href="#6">句柄和对象</a></p>
 <h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a><a name="1">进程</a></h3><p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/processTexture.png" alt="进程重要的组成结构"></p>
 <h3 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a><a name="2">虚拟内存</a></h3><ul>
 <li><p>对于32位Windows系统上进程，进程地址空间大小默认为2GB</p>
@@ -307,9 +312,14 @@
 </ul>
 <blockquote>
 <p>  注意</p>
-<p>  大页面的缺点是需要在RAM中有连续的内存,</p>
-<p>  如果内存紧张或非常碎片化，内存可能分配会失败。</p>
-<p> 大页面总是不可分页的，必须仅通过读/写访问进行保护。</p>
+<ul>
+<li><p>大页面的缺点是需要在RAM中有连续的内存,</p>
+</li>
+<li><p>如果内存紧张或非常碎片化，内存可能分配会失败。</p>
+</li>
+<li><p>大页面总是不可分页的，必须仅通过读/写访问进行保护。</p>
+</li>
+</ul>
 </blockquote>
 <ul>
 <li><h4 style="color: #4169E1">页面状态</h4>
@@ -339,11 +349,149 @@
 </ul>
 <blockquote>
 <p>   注意</p>
-<p>   所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候</p>
-<p>   每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的</p>
-<p>   保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址</p>
+<ul>
+<li><p>所有进程共享的系统地址空间,这段地址空间是在内核初始化阶段完成的，也就是每次系统重新启动系统的时候</p>
+</li>
+<li><p>每个进程都有独立的地址空间,当然这是通过CR3寄存器来区分的</p>
+</li>
+<li><p>保护模式下，只有CR3寄存器是存放物理地址的，其他所有都是线性地址</p>
+</li>
+</ul>
 </blockquote>
-<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a><a name="3">线程</a></h3>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a><a name="3">线程</a></h3><ul>
+<li><h4 style="color: #4169E1">线程重要信息</h4>
+
+<ul>
+<li><p>拥有用户访问模式和内核访问模式</p>
+</li>
+<li><p>执行上下文，包括处理器寄存器和执行状态</p>
+</li>
+<li><p>一个或两个栈，用于本地变量分配和调用管理</p>
+</li>
+<li><p>线程本地存储(TLS)数组，它提供了一种以统一访问语义存储线程私有数据的方法</p>
+</li>
+<li><p>基本优先级和当前(动态)优先级</p>
+</li>
+<li><p>处理器关联性，指示线程可以在哪个处理器上运行</p>
+</li>
+</ul>
+</li>
+<li><h4 style="color: #4169E1">线程常见状态</h4>
+
+<ul>
+<li>运行 - 正处理器上执行代码</li>
+<li>就绪 - 等待调度执行</li>
+<li>等待 - 在继续之前等待某个事件发生。一旦事件发生，线程就进入就绪状态</li>
+</ul>
+</li>
+<li><h4 style="color: #4169E1">线程堆栈</h4>
+
+</li>
+</ul>
+<p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/user_stacks.png" alt="用户模式堆栈"></p>
+<ul>
+<li><p>用户模式堆栈 - 堆栈大小为1MB，是用来存放函数参数和局部变量，处理方式与内核模式堆栈大有不同，开始占用少量内存（可能只有一个页面），其余的堆栈地址空间做为保留内存，不会以任何方式进行分配。在已经提交页面的下一个页面也就是保护页(PAGE_GUARD)进行写入，引发由内存处理的异常,内存管理器删除防护保护并提交页面和标记,将下一个页面做为保护页，这样堆栈就能继续增长。</p>
+</li>
+<li><p>内核模式堆栈 - 堆栈大小为24KB，当线程处于运行或就绪状态时，内核堆栈始终驻留在RAM中。另一方面，用户模式堆栈可能通过页被换出到磁盘，和其他用户模式内存一样，</p>
+</li>
+</ul>
+<blockquote>
+<p>   注意</p>
+<ul>
+<li><p>PE头中有一个堆栈提交和保留值。如果线程没有指定可选值，则将这些作为默认值</p>
+</li>
+<li><p>函数CreateThread和CreateRemoteThread(Ex)只允许为堆栈大小指定一个值，可以是提交的大小，也可以是保留的大小，但不能两者都指定。函数NtCreateThreadEx允许同时指定这两个值。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a><a name="4">系统调用</a></h3><p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/system_call.png" alt="系统服务功能调用流程"></p>
+<h3 id="Windows系统架构"><a href="#Windows系统架构" class="headerlink" title="Windows系统架构"></a><a name="5">Windows系统架构</a></h3><p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/system_arch.png" alt="Windows系统架构"></p>
+<ul>
+<li><p>用户进程（User Processes） 比如记事本，计算器等</p>
+</li>
+<li><p>子系统DLL（Subsystem DLL） 比如kernel32.dll, user32.dll, gdi32.dll等</p>
+</li>
+<li><p>NTDLL.DLL 一个系统级的DLL，实现Windows Native API。这是仍处于用户模式的代码的最低层。它最重要的作用是将系统调用转换到内核模式</p>
+</li>
+<li><p>服务进程（Service Processes） 服务进程是与服务控件进行通信的常规Windows进程</p>
+</li>
+<li><p>Executive 是NtOskrnl.exe的上层。 内核模式下它托管了大部分的代码。 它主要包括各种管理器：对象管理器，内存管理器，IO管理器，即插即用管理器，电源管理器，配置管理器等</p>
+</li>
+<li><p>内核（Kernel） 线程调度、中断和异常调度，以及各种如互斥锁和信号量的实现</p>
+</li>
+<li><p>设备驱动（Device Drivers）设备驱动程序是可加载的内核模块。它们的代码以内核模式执行，因此具有内核的全部功能</p>
+</li>
+<li><p>Win32k.sys 用于处理Windows的用户界面部分和的图形设备界面（GDI）API。 这意味着所有窗口操作（CreateWindowEx，GetMessage，<br>PostMessage等）由此组件处理</p>
+</li>
+<li><p>硬件抽象层（Hardware Abstraction Layer） 该层主要用于编写处理硬件设备的设备驱动程序。HAL是最接近CPU的硬件上的一个抽象层。</p>
+</li>
+<li><p>系统进程（System Processes） 比如Smss.exe, Lsass.exe, Winlogon.exe, Services.exe等</p>
+</li>
+<li><p>子系统进程（Subsystem Process）Csrss.exe用于管理在Windows系统下运行的进程的内核。 这是一个关键的进程。</p>
+</li>
+<li><p>Hyper-V Hypervisor 运行于Windows 10和server 2016(以及更高版本)系统中，前提是它们支持基于虚拟化的安全(VBS)。VBS提供了一个额外的安全层，其中实际的机器实际上是由Hyper-V控制的虚拟机</p>
+</li>
+</ul>
+<h3 id="句柄和对象"><a href="#句柄和对象" class="headerlink" title="句柄和对象"></a><a name="5">句柄和对象</a></h3><p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/winobj.png" alt="windows对象管理器"></p>
+<p><img src="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/process_explorer.png" alt="Process Explorer"></p>
+<ul>
+<li><h4 style="color: #4169E1">内核对象简介</h4>
+
+<ul>
+<li><p>对象种类 - 比较重要的内核对象由：访问令牌对象(access token), 事件对象，文件对象，文件映射对象，IO对象，互斥量对象(mailslot)，进程对象，信号量对象(semaphore)，线程对象等</p>
+</li>
+<li><p>对象被引用计数 - 只有当对象的最后一个引用被释放时，对象才会被销毁并从内存中释放。</p>
+</li>
+<li><p>由于这些对象实例驻留在系统空间中，因此不能通过用户模式直接访问它们。</p>
+</li>
+<li><p>对象句柄 - 用户模式使用对象句柄的进行间接访问。句柄是句柄表中一个条目的索引，该表由当前进程维护，它逻辑上指向驻留在系统空间中的内核对象。有各种Create<em>和Open</em>函数来创建/打开对象和检索这些对象的句柄</p>
+</li>
+</ul>
+</li>
+<li><h4 style="color: #4169E1">对象名称</h4>
+
+<ul>
+<li><p>对象可以使用这些名称通过适当的open函数通过名称打开对象。注意：并非所有对象都有名称，例如：进程和线程没有名称——它们有id。这就是OpenProcess和OpenThread函数需要进程/线程标识符(一个数字)而不是字符串名称的原因。另一种有点奇怪的没有名称的对象是文件。文件名不是对象的名称—它们是不同的概念</p>
+</li>
+<li><p>提供给Create*函数的名称实际上不是对象的最终名称。它的前缀是\Sessions\x\BaseNamedObjects，其中x是调用者的会话ID。如果会话为0，则名称前面加上\BaseNamedObjects\。如果调用者恰好在AppContainer（Win8）中运行(通常是一个通用的Windows平台进程)，那么预写的字符串更加复杂，由唯一的<br>AppContainerSID: \Sessions\x\AppContainerNamedObjects{AppContainerSID}组成。</p>
+</li>
+<li><p>上图（windows对象管理器）它由命名对象的层次结构组成，整个结构保存在内存中，由对象管理器根据需要进行操作。请注意，未命名的对象（句柄值）不是这个结构的一部分，这意味着在WinObj中看到的对象并不包含所有现有的对象，而是所有使用名称创建的对象</p>
+</li>
+<li><p>每个进程都有一个专用于内核对象（无论是否命名）的句柄表，可以使用Process Explorer和/或Handles Sysinternals工具进行查看。 </p>
+</li>
+</ul>
+</li>
+<li><h4 style="color: #4169E1">访问现有的对象</h4>
+
+<ul>
+<li><p>通过一段代码来演示打开句柄和关闭句柄</p>
+<pre><code class="c++">  bool KillProcess(DWORD pid) {
+      //打开一个进程句柄 必须具有 PROCESS_TERMINATE权限
+      HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
+      if (!hProcess)
+      return false;
+      // 结束进程
+      BOOL success = TerminateProcess(hProcess, 1);
+      // 关闭句柄
+      CloseHandle(hProcess);
+      return success != FALSE;
+  }
+</code></pre>
+</li>
+<li><p>通过windbg查看对象引用计数</p>
+<pre><code class="c++">lkd&gt; !object 0xFFFFA08F948AC0B0
+Object: ffffa08f948ac0b0 Type: (ffffa08f684df140) Event
+ObjectHeader: ffffa08f948ac080 (new version)
+HandleCount: 2 PointerCount: 65535
+Directory Object: ffff90839b63a700 Name: ShellDesktopSwitchEvent
+
+lkd&gt; !trueref ffffa08f948ac0b0
+ffffa08f948ac0b0: HandleCount: 2 PointerCount: 65535 RealPointerCount: 3</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 964098704@qq.com </span>
     </div>
@@ -356,7 +504,7 @@
     
     <p><span class="copy-title">本文作者:</span><a  title="馍馍">馍馍</a></p>
     <p><span class="copy-title">发布时间:</span>2020-02-10, 16:24:42</p>
-    <p><span class="copy-title">最后更新:</span>2020-02-10, 21:52:59</p>
+    <p><span class="copy-title">最后更新:</span>2020-02-11, 16:28:37</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/" title="驱动开发必备基础">http://yoursite.com/2020/02/10/%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
